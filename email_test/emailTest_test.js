@@ -21,7 +21,7 @@ Data(emailTestTable).Scenario('eMail_Test', async({I , current}) => {
 //文面の文言検証
     I.assertContain(mails.body, current.verifyWord);
     const memberid = await mails.body.match(/[A-Za-z0-9_.-]*@example.com/)[0];
-    const url = await mails.body.match(/https?:\/\/(.*?)\/login.html/)[0];
+    const url = await mails.body.match(/(https?|ftp)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)/g)[0];
     console.log(mails.body);
 //文面から取得したURLに移動
     await I.amOnPage(url);
